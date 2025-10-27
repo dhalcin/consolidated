@@ -1,4 +1,4 @@
-import flet as ft
+from src.ui import ft
 
 def main_app(page: ft.Page):
     print('run')
