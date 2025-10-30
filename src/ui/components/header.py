@@ -1,12 +1,21 @@
 import flet as ft
-from typing import Callable
 
-def create_header(file_button: Callable):
+def create_header(file_button: ft.Control, file_label: ft.Control):
     return ft.AppBar(
-        leading=ft.Container(
-            content=file_button,
-            alignment=ft.alignment.center,
-            margin=ft.margin.only(left=10, top=4, bottom=4)
+        leading=ft.Row(
+            [
+                ft.Container(
+                    content=file_button,
+                    margin=ft.margin.only(left=30, top=4, bottom=4),
+                    alignment=ft.alignment.center
+                ),
+                ft.Container(
+                    content=file_label,
+                    alignment=ft.alignment.center_left,
+                    margin=ft.margin.only(left=10)
+                )  
+            ],
+            spacing=10
         ),
         leading_width=190,
         bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
