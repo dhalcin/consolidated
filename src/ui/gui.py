@@ -2,9 +2,10 @@ import flet as ft
 from src.ui.components import create_sidebar
 from src.ui.components import create_header
 from src.ui.components import create_file_pick_button
+from src.data_logic import open_excel
 
 def main_app(page: ft.Page):
-    page.title = 'Consilidado'
+    page.title = 'Consolidado'
 
     select_file_text = ft.Text(value='', size=14, color=ft.Colors.BLACK)
 
@@ -12,6 +13,7 @@ def main_app(page: ft.Page):
         if e.files:
             file_name = e.files[0].name
             select_file_text.value = f'Selected file : {file_name}'
+            open_excel(e.files[0].path)
             page.update()
 
     file_picker_dialog = ft.FilePicker(on_result=handle_file_pick)
@@ -29,9 +31,9 @@ def main_app(page: ft.Page):
         ]
     )
 
-    print(file_picker_dialog)
-
     page.appbar = create_header(select_file_button, select_file_text)
+
+    
 
     page.add(
         ft.Row(
