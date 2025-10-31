@@ -1,1 +1,1 @@
-from .excel_manage import open_excel
+from .excel_manage import open_excel, get_columns
