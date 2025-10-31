@@ -9,14 +9,22 @@ def main_app(page: ft.Page):
 
     select_file_text = ft.Text(value='', size=14, color=ft.Colors.BLACK)
 
-    def handle_file_pick(e: ft.FilePickerResultEvent):
+    def handle_file_pick(e: ft.FilePickerResultEvent, on_file_selected: callable):
+        global manage_file
         if e.files:
             file_name = e.files[0].name
+            file_path = e.files[0].path
             select_file_text.value = f'Selected file : {file_name}'
-            open_excel(e.files[0].path)
+            on_file_selected(file_path)
             page.update()
 
-    file_picker_dialog = ft.FilePicker(on_result=handle_file_pick)
+    def on_file_selected(path):
+        file_path = open_excel(path)
+        print(file_path)
+
+    file_picker_dialog = ft.FilePicker(
+        on_result=lambda e: handle_file_pick(e, on_file_selected)
+    )
     page.overlay.append(file_picker_dialog)
 
     
@@ -32,8 +40,6 @@ def main_app(page: ft.Page):
     )
 
     page.appbar = create_header(select_file_button, select_file_text)
-
-    
 
     page.add(
         ft.Row(
