@@ -2,7 +2,8 @@ import flet as ft
 from src.ui.components import create_sidebar
 from src.ui.components import create_header
 from src.ui.components import create_file_pick_button
-from src.data_logic import open_excel, get_columns
+from src.data_logic import open_excel, get_columns, load_and_clean_excel
+from src.ui.views import create_table_view
 
 def main_app(page: ft.Page):
     page.title = 'Consolidado'
@@ -18,13 +19,13 @@ def main_app(page: ft.Page):
             on_file_selected(file_path)
             page.update()
 
-    def on_file_selected(path):
-        df = open_excel(path)
-        all_columns(df)
-
-    def all_columns(df):
+    view_columns_container = ft.Column()
+    def on_file_selected(file_path):
+        df = open_excel(file_path)
         columns = get_columns(df)
-        print(columns)
+        load_and_clean_excel(df, columns) 
+        view_columns_container.controls = [create_table_view(columns)] # create_table_view is main_content
+        page.update()
 
     file_picker_dialog = ft.FilePicker(
         on_result=lambda e: handle_file_pick(e, on_file_selected)
@@ -36,12 +37,6 @@ def main_app(page: ft.Page):
         'Choose files ...'
     )
 
-    main_content = ft.Column(
-        [
-            ft.Text('DataTable')
-        ]
-    )
-
     page.appbar = create_header(select_file_button, select_file_text)
 
     page.add(
@@ -49,7 +44,7 @@ def main_app(page: ft.Page):
             [
                 create_sidebar(),
                 ft.VerticalDivider(width=1),
-                main_content
+                view_columns_container
             ],
             expand=True
         )
