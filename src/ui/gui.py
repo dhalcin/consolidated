@@ -18,11 +18,26 @@ async def main_app(page: ft.Page):
             page.update()
             await on_file_selected(file_path)
 
-    loader = ft.ProgressBar(width=400, visible=False)
-    view_columns_container = ft.Column()
+    loader = ft.ProgressRing()
+    view_columns_container = ft.Column(expand=True)
+
+    loader_overlay = ft.Container(
+        content=loader,
+        alignment=ft.alignment.center,
+        expand=True,
+        visible=False
+    )
+
+    table_stactk = ft.Stack(
+        [
+            view_columns_container,
+            loader_overlay
+        ],
+        expand=True
+    )
 
     async def on_file_selected(file_path):
-        loader.visible = True
+        loader_overlay.visible = True
         page.update()
 
         await asyncio.sleep(0.1)
@@ -32,7 +47,7 @@ async def main_app(page: ft.Page):
         await asyncio.to_thread(load_and_clean_excel, df, columns)
 
         view_columns_container.controls = [create_table_view(columns)]
-        loader.visible = False
+        loader_overlay.visible = False
         page.update()
 
     file_picker_dialog = ft.FilePicker(on_result=handle_file_pick)
@@ -50,7 +65,7 @@ async def main_app(page: ft.Page):
             [
                 create_sidebar(),
                 ft.VerticalDivider(width=1),
-                ft.Column([loader, view_columns_container], expand=True),
+                table_stactk
             ],
             expand=True
         )
