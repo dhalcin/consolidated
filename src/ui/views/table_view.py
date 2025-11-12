@@ -1,14 +1,21 @@
 import flet as ft
 
 def iterate_columns(columns):
-    col = []
-    for column in columns:
-        col.append(ft.DataColumn(ft.Text(column)))
+    col = [ft.DataColumn(ft.Text(column)) for column in columns]
     return col
-    
-def create_table_view(all_columns):
+
+def iterate_rows(rows):
+    data_rows = []
+    for row in rows:
+        cells = [ft.DataCell(ft.Text(str(rw))) for rw in row]
+        data_rows.append(ft.DataRow(cells=cells))
+    return data_rows
+        
+
+def create_table_view(columns, rows):
     data = ft.DataTable(
-        columns=iterate_columns(all_columns)
+        columns=iterate_columns(columns),
+        rows=iterate_rows(rows)
     )
 
     return data
