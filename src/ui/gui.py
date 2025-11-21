@@ -3,7 +3,7 @@ from src.ui.components import create_header
 from src.ui.components import create_file_pick_button
 from src.data_logic import open_excel, get_columns, get_rows, load_and_clean_excel
 from src.ui.views import create_table_view
-import flet as ft
+import flet as ft 
 import asyncio
 
 async def main_app(page: ft.Page):
