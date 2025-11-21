@@ -1,1 +1,1 @@
-from .gui import main_app
+from .gui import main
