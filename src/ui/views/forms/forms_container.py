@@ -1,15 +1,10 @@
 import flet as ft
+from src.ui.views.forms.sections import build_file_picker_container
 
 def build_forms_container():
-    container = ft.Container (
-        content=ft.Text(value='Esto es un container', color='red'),
-        bgcolor=ft.Colors.AMBER_100,
-        expand=True
-    )
-
     return ft.Row(
         [
-            container
+            build_file_picker_container()
         ],
         expand=True
     )
