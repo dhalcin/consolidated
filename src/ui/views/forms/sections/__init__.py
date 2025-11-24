@@ -3,3 +3,4 @@ from .general_data_container import build_general_data_container
 from .establishment_container import build_establishment_container
 from .patient_form_container import build_patient_form_container
 from .professional_data_container import build_professional_data_container
+from .care_data_container import build_care_data_container
