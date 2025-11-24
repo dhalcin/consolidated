@@ -5,7 +5,7 @@ from src.ui.views.data_views import build_data_view_container
 
 def main(page: ft.Page):
 
-    #page.bgcolor = '#FFFFFF'
+    page.bgcolor = '#FFFFFF'
 
     page.add(
         ft.Column(
