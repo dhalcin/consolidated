@@ -2,3 +2,4 @@ from .file_picker_container import build_file_picker_container
 from .general_data_container import build_general_data_container
 from .establishment_container import build_establishment_container
 from .patient_form_container import build_patient_form_container
+from .professional_data_container import build_professional_data_container
