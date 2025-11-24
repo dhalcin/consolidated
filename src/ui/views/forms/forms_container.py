@@ -6,6 +6,7 @@ from src.ui.views.forms.sections import build_patient_form_container
 from src.ui.views.forms.sections import build_professional_data_container
 from src.ui.views.forms.sections import build_care_data_container
 from src.ui.views.forms.sections import build_column_selector_container
+from src.ui.views.forms.sections import build_search_button_container
 
 def build_forms_container():
     return ft.Column(
@@ -59,6 +60,14 @@ def build_forms_container():
                         content=build_column_selector_container(),
                         padding=5,
                         col={'sm': 4, 'xl': 3},
+                        border=ft.border.all(1, '#36B7E2'),
+                        border_radius=ft.border_radius.all(10)
+                    ),
+                    ft.Container(
+                        content=build_search_button_container(),
+                        bgcolor='#FAFAFA',
+                        padding=5,
+                        col={'sm': 3, 'xl':2},
                         border=ft.border.all(1, '#36B7E2'),
                         border_radius=ft.border_radius.all(10)
                     )
