@@ -3,7 +3,7 @@ import flet as ft
 def create_options(list_options):
     options = []
 
-    for op in list_options:
+    for op in list_options: # The list_options list is just an example list 
         options.append(ft.DropdownOption(
             key=op,
             content=ft.Text(op, color=ft.Colors.BLACK)
@@ -12,7 +12,7 @@ def create_options(list_options):
     return options
 
 def content_label(label):
-    return ft.Text(label, color='black')
+    return ft.Text(value=label, color=ft.Colors.BLACK)
 
 def dropdown(label, options):
     return ft.Dropdown(
@@ -23,28 +23,21 @@ def dropdown(label, options):
         bgcolor=ft.Colors.WHITE
     ) 
 
-def main_content():
+def create_container(label, options):
+    return ft.Container(
+        content=dropdown(label, options),
+        col={'sm': 6}
+    )
 
+def main_content():
     return ft.Column(
         [
             ft.ResponsiveRow(
                 [
-                    ft.Container( 
-                        content=dropdown('# Batch', ['L01', 'L02', 'L03']),
-                        col={'sm': 6}
-                    ),
-                    ft.Container( 
-                        content=dropdown('# Sheet', ['1', '2', '3']),
-                        col={'sm': 6}
-                    ),
-                    ft.Container( 
-                        content=dropdown('# Reg', ['1', '2', '3']),
-                        col={'sm': 6}
-                    ),
-                    ft.Container( 
-                        content=dropdown('Date', ['11', '22', '34']),
-                        col={'sm': 6}
-                    )
+                    create_container('# Batch', ['L01', 'L02', 'L03']),
+                    create_container('# Sheet', ['1', '2', '3']),
+                    create_container('# Reg', ['1', '2', '3']),
+                    create_container('Date', ['11', '22', '30'])
                 ]
             )
         ]
